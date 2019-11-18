@@ -15,21 +15,19 @@ password="vagrant"
 
 echo
 
-if [[ $EUID -ne 0 ]]; then
-    echo "[ERROR] This script must be run as root."
-    echo
-    exit 1
-fi
-
 if [ -z "${macinbox}" ]; then
-    echo "[ERROR] Could not find macinbox."
-    echo "[ERROR] Please install macinbox and ensure it is in your PATH."
-    echo
-    echo "To install macinbox, run:"
-    echo
-    echo "    gem install macinbox"
-    echo
-    exit 1
+    echo "[WARNING] Could not find macinbox. Attempting to install with Bundler."
+
+    bundle=$(which bundle)
+    if [ -z "${bundle}" ]; then
+        echo "[ERROR] Could not find bundle. Install macinbox using:"
+        echo
+        echo "    gem install macinbox"
+        echo
+        exit 1
+    fi
+
+    bundle install
 fi
 
 if [ ! -d "${installer_path}" ]; then
@@ -52,7 +50,7 @@ fi
 echo "Proceeding..."
 echo
 
-macinbox \
+sudo macinbox \
     --box-format "${format}" \
     --name "${vm_name}" \
     --disk "${disk}" \
