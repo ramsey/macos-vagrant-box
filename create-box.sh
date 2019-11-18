@@ -1,14 +1,14 @@
 #!/bin/bash
 
+box="$1"
+vm_name="${box}"
+version="$2"
+description="$3"
+
 org="ramsey"
-box="macos-catalina"
 org_box="${org}/${box}"
 provider="virtualbox"
 box_file="$(pwd)/package.box"
-
-vm_name="$1"
-version="$2"
-description="$3"
 
 echo
 echo "VM:           ${vm_name}"
@@ -28,6 +28,11 @@ fi
 
 echo "Proceeding..."
 echo
+
+cp Vagrantfile.template Vagrantfile
+sed -i -e "s|{{ box }}|${box}|g;s|{{ vm_name }}|${vm_name}|g" Vagrantfile
+
+vagrant up
 
 vagrant package --base "${vm_name}"
 
