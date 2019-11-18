@@ -52,8 +52,6 @@ fi
 echo "Proceeding..."
 echo
 
-exit
-
 macinbox \
     --box-format "${format}" \
     --name "${vm_name}" \
