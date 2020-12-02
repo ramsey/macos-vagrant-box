@@ -36,6 +36,12 @@ https://app.vagrantup.com/ramsey/boxes/macos-high-sierra
 
 ## FAQs
 
+### It won't boot. What's the problem?
+
+If your host machine is not macOS, then it's very likely this won't run.
+Attempting to run macOS on non-certified Apple hardware is a violation of their
+EULA. I'm not able to help, if this is the case, so please do not open an issue.
+
 ### How do I get started?
 
 You can quickly start using `vagrant init [box name]`. For example:
